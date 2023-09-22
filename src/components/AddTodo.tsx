@@ -1,15 +1,18 @@
 import { useState } from "react"
 import { useTodoActions } from "../stores/todoStore"
+import { todosStore } from "../stores/todoStoreNative.ts";
 
 const AddTodo = () => {
-    const { createTodo } = useTodoActions()
+    //const { createTodo } = useTodoActions()
     const [todoInput, setTodoInput] = useState('')
 
     const handleSubmit = (e:  React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
 
+        todosStore.addTodo()
         if (todoInput === '') return
-        createTodo({ text: todoInput})
+
+        //createTodo({ text: todoInput})
         setTodoInput('')
     }
 

@@ -1,4 +1,5 @@
 import { create } from "zustand";
+//import { create } from '../simpleZustand'
 import { v4 as createId } from 'uuid';
 
 export type ID = string
@@ -8,23 +9,44 @@ interface TodoItem {
     id: ID
 }
 
-type TodoItemInput = Pick<TodoItem, 'text'> 
+type TodoItemInput = Omit<TodoItem, 'id'> 
 
 interface TodoStoreProps {
   todos: Array<TodoItem>
   actions: {
     createTodo: (todo: TodoItemInput) => void
     deleteTodo: (id: ID) => void
+    updateTodo: (id: ID, update: string) => void
     getTodo: (id: ID) => TodoItem | undefined
   };
+}
+
+function createTodo(todos: Array<TodoItem>, todo: TodoItemInput) { 
+  return {todos: [ ...todos, { ...todo, id: createId() } ]} 
+}
+
+function deleteTodo(todos: Array<TodoItem>, id: ID) { 
+  return { todos: todos.filter(todo => todo.id !== id)}
+}
+
+function getTodo(todos: Array<TodoItem>, id: ID) {
+  return todos.find(todo => todo.id === id)
+}
+
+function updateTodo(todos: Array<TodoItem>, update:string, id:ID) {
+  const updatedTodos = deleteTodo(todos, id).todos 
+  const updatedTodo = { id, text: update }
+
+  return { todos: [...updatedTodos, updatedTodo]} 
 }
 
 const useTodoStore = create<TodoStoreProps>((set, get) => ({
   todos: [], 
   actions: {
-    createTodo: (todo) => set(() => { return {todos: [ ...get().todos, { ...todo, id: createId() } ]} }),
-    deleteTodo: (id) =>  set(() => { return { todos: get().todos.filter(todo => todo.id !== id)}}),
-    getTodo: (id) => get().todos.find(todo => todo.id === id)
+    createTodo: (todo) => set(createTodo(get().todos, todo)),
+    deleteTodo: (id) =>  set(deleteTodo(get().todos, id)),
+    updateTodo: (id, update) => set(updateTodo(get().todos, id, update)),
+    getTodo: (id) => getTodo(get().todos, id) 
   },
 }));
 
