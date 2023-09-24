@@ -1,6 +1,6 @@
 //import { create } from "zustand";
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
+// @ts-nocheck
 import { create } from "../simplified-zustand";
 import { v4 as createId } from 'uuid';
 

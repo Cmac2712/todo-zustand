@@ -1,16 +1,18 @@
 import { AddTodo } from "./components/AddTodo"
 import { TodoList } from "./components/TodoList"
-import { useGetTodos } from "./stores/todoStore"
+import './index.css'
 
 function App() {
-
   return (
     <>
-      <h1>My Todo List</h1>
-      <TodoList />
-      <AddTodo /> 
+
+      <div className="max-w-lg mx-auto">
+        <h1 className="text-3xl font-bold text-center py-3">My Todos</h1>
+        <TodoList />
+        <AddTodo />
+      </div>
     </>
-  )
+  );
 }
 
-export default App
+export default App;

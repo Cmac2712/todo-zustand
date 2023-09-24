@@ -12,7 +12,7 @@ const TodoItem = ({text, id}:TodoItemProps) => {
   const [editMode, setEditMode] = useState(false)
 
   return (
-    <li id={id}>
+    <li id={id} className="flex p-2 justify-between">
       { editMode ? <UpdateTodo text={text} id={id} close={() => setEditMode(false)} /> : <p>{text}</p> }
       <DeleteTodo id={id}/>
       <button onClick={() => setEditMode(!editMode)}>Edit</button>
