@@ -9,7 +9,7 @@ const DeleteTodo = ({id}: DeleteTodoProps) => {
 
     const handleDelete = () => deleteTodo(id) 
 
-    return <button onClick={handleDelete}>X</button> 
+    return <button className="btn  btn-error btn-sm text-xs rounded-none" onClick={handleDelete}>Delete</button> 
 }
 
 export { DeleteTodo }

@@ -15,10 +15,12 @@ const AddTodo = () => {
     }
 
     return (
-        <form onSubmit={handleSubmit}>
-            <input name="todoInput" type="text" onChange={(e) => setTodoInput(e.target.value)} value={todoInput}/>
-            <button>Add Todo</button>
-        </form>
+        <div className="fixed w-full bottom-0 left-0 py-12">
+            <form className="flex justify-center" onSubmit={handleSubmit}>
+                <input className="input input-bordered input-primary rounded-none mr-2" name="todoInput" type="text" onChange={(e) => setTodoInput(e.target.value)} value={todoInput}/>
+                <button className="btn btn-primary rounded-none">Add Todo</button>
+            </form>
+        </div>
     )
 }
 

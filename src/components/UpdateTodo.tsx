@@ -12,13 +12,13 @@ const UpdateTodo = ({ text, id, close }: UpdateTodoProps) => {
   const [updateText, setUpdateText] = useState(text);
 
   return (
-    <li id={id}>
-      <input type="text" value={updateText} onChange={(e) => setUpdateText(e.target.value)} />
-      <button onClick={() => {
+    <div id={id}>
+      <input className="input input-success input-sm rounded-none mr-2" type="text" value={updateText} onChange={(e) => setUpdateText(e.target.value)} />
+      <button className="btn btn-success btn-sm text-xs rounded-none" onClick={() => {
         updateTodo(updateText, id)
         close();
         }}>Update</button>
-    </li>
+    </div>
   );
 };
 

@@ -6,8 +6,8 @@ function App() {
   return (
     <>
 
-      <div className="max-w-lg mx-auto">
-        <h1 className="text-3xl font-bold text-center py-3">My Todos</h1>
+      <div className="max-w-lg h-screen mx-auto">
+        <h1 className="text-3xl font-bold text-center py-3 mb-4">My Todos</h1>
         <TodoList />
         <AddTodo />
       </div>
