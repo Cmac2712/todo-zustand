@@ -1,8 +1,15 @@
-//import { create } from "zustand";
+import { create } from "zustand";
+import { persist } from "zustand/middleware";
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
-import { create } from "../simplified-zustand";
+//import { create } from "../simplified-zustand";
 import { v4 as createId } from 'uuid';
+
+interface Profile {
+  avatar: string
+  firstName: string
+  lastName: string
+}
 
 export type ID = string
 
@@ -15,6 +22,7 @@ type TodoItemInput = Omit<TodoItem, 'id'>
 
 interface TodoStoreProps {
   todos: Array<TodoItem>
+  profile: Profile,
   actions: {
     createTodo: (todo: TodoItemInput) => void
     deleteTodo: (id: ID) => void
@@ -42,15 +50,24 @@ function updateTodo(todos: Array<TodoItem>, update:string, id:ID) {
   return { todos: [...updatedTodos, updatedTodo]} 
 }
 
-const useTodoStore = create<TodoStoreProps>((set, get) => ({
-  todos: [], 
-  actions: {
-    createTodo: (todo) => set(createTodo(get().todos, todo)),
-    deleteTodo: (id) =>  set(deleteTodo(get().todos, id)),
-    updateTodo: (id, update) => set(updateTodo(get().todos, id, update)),
-    getTodo: (id) => getTodo(get().todos, id) 
-  },
-}));
+export const useTodoStore = create<TodoStoreProps>(
+  (set, get) => ({
+    todos: [], 
+    profile: { 
+      avatar: 'https://avatars.githubusercontent.com/u/4986039?v=4',
+      firstName: 'Craig',
+      lastName: 'MacIntyre'
+    },
+    actions: {
+      createTodo: (todo) => set(createTodo(get().todos, todo)),
+      deleteTodo: (id) =>  set(deleteTodo(get().todos, id)),
+      updateTodo: (id, update) => set(updateTodo(get().todos, id, update)),
+      getTodo: (id) => getTodo(get().todos, id) 
+    },
+  })
+);
 
-export const useGetTodos = () => useTodoStore((state) => state.todos);
+
+export const useGetProfile = () => useTodoStore(state => state);
+export const useGetTodos = () => useTodoStore(state => state.todos);
 export const useTodoActions = () => useTodoStore((state) => state.actions);
