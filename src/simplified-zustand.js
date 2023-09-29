@@ -28,6 +28,8 @@ export const create = (createState) => {
   const subscribe = (callback) => {
     // Add the callback function to the listeners set.
     listeners.add(callback);
+    console.log('listeners', listeners)
+    console.log('callback', callback)
     // And, return a function to unsubscribe.
     return () => listeners.delete(callback);
   };

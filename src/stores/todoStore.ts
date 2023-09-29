@@ -1,8 +1,8 @@
-import { create } from "zustand";
+//import { create } from "zustand";
 import { persist } from "zustand/middleware";
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
-//import { create } from "../simplified-zustand";
+import { create } from "../simplified-zustand";
 import { v4 as createId } from 'uuid';
 
 interface Profile {
